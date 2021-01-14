@@ -42,28 +42,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdpteHo
     @Override
     public void onBindViewHolder(@NonNull MovieAdpteHolder holder, int position) {
         Movie.Datum datum=data.get(position);
-        holder.itemMovieBinding.mShimmerViewContainer.startShimmerAnimation();
+       // holder.itemMovieBinding.mShimmerViewContainer.startShimmerAnimation();
         holder.itemMovieBinding.txtRate.setText(datum.getImdbRating());
         holder.itemMovieBinding.txtTitle.setText(datum.getTitle());
-        Picasso.with(context).load(datum.getPoster()).into(new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                holder.itemMovieBinding.imageView.setImageBitmap(bitmap);
-                holder.itemMovieBinding.mShimmerViewContainer.stopShimmerAnimation();
-            }
-
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-               // holder.itemMovieBinding.imageView.setImageResource(R.drawable.loading);
-              //  holder.itemMovieBinding.mShimmerViewContainer.stopShimmerAnimation();
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-               // holder.itemMovieBinding.imageView.setImageResource(R.drawable.loading);
-                holder.itemMovieBinding.mShimmerViewContainer.stopShimmerAnimation();
-            }
-        });
+        Picasso.with(context).load(datum.getPoster()).into(holder.itemMovieBinding.imageView);
 
     }
 

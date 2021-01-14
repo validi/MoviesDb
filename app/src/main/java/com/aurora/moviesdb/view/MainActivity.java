@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -98,11 +99,24 @@ recyclerView=binding.recycler;
             @Override
             public void onItemClick(Movie.Datum post) {
                 Intent intent = new Intent(getApplicationContext(), MovieActivity.class);
-                intent.putExtra("movie",post);
+                intent.putExtra("poster",post.getPoster());
+                intent.putExtra("title",post.getTitle());
+                intent.putExtra("rate",post.getImdbRating());
+                intent.putExtra("year",post.getYear());
+                intent.putExtra("country",post.getCountry());
+
+                String genres="";
+                for (int i = 0; i <post.getGenres().size() ; i++) {
+                    genres+=post.getGenres().get(i)+" - ";
+                }
+                genres.substring(0,genres.length()-2);
+                intent.putExtra("genres",genres);
                 startActivity(intent);
                // Toast.makeText(getApplicationContext(), post.getTitle()+"", Toast.LENGTH_SHORT).show();
 
             }
         });
+
+
     }
 }

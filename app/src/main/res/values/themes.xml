@@ -13,4 +13,23 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.MoviesDb.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <style name="Widget.MyApp.Toolbar.Solid" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/primary</item>
+        <item name="android:elevation" tools:ignore="NewApi">4dp</item>
+
+    </style>
+
+    <style name="ThemeOverlay.MyApp.ActionBar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <!-- Parent theme sets colorControlNormal to textColorPrimary. -->
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+
 </resources>
