@@ -34,14 +34,10 @@ public class MovieActivity extends AppCompatActivity {
              datum.setYear(intent.getStringExtra("year"));
              datum.setCountry(intent.getStringExtra("country"));
 
-            Picasso.with(getApplicationContext()).load(datum.getPoster()).into(binding.imgPoster);
-            binding.toolbar.setTitle(datum.getTitle());
-            binding.txtName.setText(datum.getTitle());
-            binding.txtRate.setText(datum.getImdbRating());
-            binding.txtDate.setText(datum.getYear());
-            binding.txtCountry.setText(datum.getCountry());
+             binding.setDatum(datum);
+
             binding.txtGenres.setText(intent.getStringExtra("genres"));
-            binding.toolbar.setTitleTextColor(Color.WHITE);
+
        }
     }
 }

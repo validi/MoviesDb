@@ -1,9 +1,6 @@
-package com.aurora.moviesdb;
+package com.aurora.moviesdb.adpter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.aurora.moviesdb.R;
 import com.aurora.moviesdb.databinding.ItemMovieBinding;
 import com.aurora.moviesdb.model.Movie;
-import com.aurora.moviesdb.view.MovieActivity;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 
@@ -34,7 +30,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdpteHo
     @NonNull
     @Override
     public MovieAdpteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemMovieBinding itemMovieBinding =DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.item_movie,parent,false);
+        ItemMovieBinding itemMovieBinding =DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_movie,parent,false);
         return new MovieAdpteHolder(itemMovieBinding);
 
     }
@@ -43,10 +39,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdpteHo
     public void onBindViewHolder(@NonNull MovieAdpteHolder holder, int position) {
         Movie.Datum datum=data.get(position);
        // holder.itemMovieBinding.mShimmerViewContainer.startShimmerAnimation();
-        holder.itemMovieBinding.txtRate.setText(datum.getImdbRating());
-        holder.itemMovieBinding.txtTitle.setText(datum.getTitle());
-        Picasso.with(context).load(datum.getPoster()).into(holder.itemMovieBinding.imageView);
+      //  holder.itemMovieBinding.txtRate.setText(datum.getImdbRating());
+       // holder.itemMovieBinding.txtTitle.setText(datum.getTitle());
+       // datum.setPoster(datum.getPoster());
+       // Picasso.with(context).load(datum.getPoster()).into(holder.itemMovieBinding.imageView);
 
+        holder.itemMovieBinding.setDatum(datum);
     }
 
     @Override

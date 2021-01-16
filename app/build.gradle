@@ -53,6 +53,12 @@ dependencies {
 
 
     // Shimmer
-
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+
+    def lifecycle_version1 = '2.2.0'
+    // ViewModel + LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version1"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version1"
+
 }

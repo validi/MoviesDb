@@ -2,9 +2,16 @@ package com.aurora.moviesdb.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.ImageView;
 
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.databinding.BindingAdapter;
+
+import com.aurora.moviesdb.BR;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.List;
@@ -152,7 +159,7 @@ public class Movie implements Parcelable , Serializable
 
     }
 
-   public static class Datum implements Parcelable {
+   public static class Datum extends BaseObservable implements Parcelable {
 
         @SerializedName("id")
         @Expose
@@ -160,9 +167,20 @@ public class Movie implements Parcelable , Serializable
         @SerializedName("title")
         @Expose
         private String title;
+
+
         @SerializedName("poster")
         @Expose
         private String poster;
+        @BindingAdapter({"poster"})
+        public static void loadImage(ImageView imageView,String imageUrl){
+           // datum.setPoster(datum.getPoster());
+            Picasso.with(imageView.getContext())
+                    .load(imageUrl)
+                    .into(imageView);
+        }
+
+
         @SerializedName("year")
         @Expose
         private String year;
@@ -208,68 +226,77 @@ public class Movie implements Parcelable , Serializable
         public Datum() {
         }
 
+        @Bindable
         public Integer getId() {
             return id;
         }
 
         public void setId(Integer id) {
             this.id = id;
+            notifyPropertyChanged(BR.id);
         }
-
+       @Bindable
         public String getTitle() {
             return title;
         }
 
         public void setTitle(String title) {
             this.title = title;
+            notifyPropertyChanged(BR.title);
         }
-
+       @Bindable
         public String getPoster() {
             return poster;
         }
 
         public void setPoster(String poster) {
             this.poster = poster;
+            notifyPropertyChanged(BR.poster);
         }
-
+       @Bindable
         public String getYear() {
             return year;
         }
 
         public void setYear(String year) {
             this.year = year;
+            notifyPropertyChanged(BR.year);
         }
-
+       @Bindable
         public String getCountry() {
             return country;
         }
 
         public void setCountry(String country) {
             this.country = country;
+            notifyPropertyChanged(BR.country);
         }
-
+       @Bindable
         public String getImdbRating() {
             return imdbRating;
         }
 
         public void setImdbRating(String imdbRating) {
             this.imdbRating = imdbRating;
+            notifyPropertyChanged(BR.imdbRating);
         }
-
+       @Bindable
         public List<String> getGenres() {
             return genres;
         }
 
         public void setGenres(List<String> genres) {
             this.genres = genres;
+            notifyPropertyChanged(BR.genres);
         }
-
+       @Bindable
         public List<String> getImages() {
             return images;
         }
 
         public void setImages(List<String> images) {
             this.images = images;
+            notifyPropertyChanged(BR.images);
         }
 
         public void writeToParcel(Parcel dest, int flags) {
@@ -288,4 +315,5 @@ public class Movie implements Parcelable , Serializable
         }
 
     }
+
 }
