@@ -4,9 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.BindingAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 
 import com.aurora.moviesdb.BR;
 import com.google.gson.annotations.Expose;
@@ -315,5 +317,17 @@ public class Movie implements Parcelable , Serializable
         }
 
     }
+
+    public static final DiffUtil.ItemCallback<Datum>  CALLBACK=new DiffUtil.ItemCallback<Datum>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Datum oldItem, @NonNull Datum newItem) {
+            return oldItem.id==newItem.id;
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Datum oldItem, @NonNull Datum newItem) {
+            return true;
+        }
+    };
 
 }

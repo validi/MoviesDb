@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.paging.LivePagedList;
+
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 

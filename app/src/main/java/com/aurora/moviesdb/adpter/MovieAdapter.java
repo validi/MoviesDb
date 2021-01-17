@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aurora.moviesdb.R;
@@ -16,12 +17,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdpteHolder> {
+public class MovieAdapter extends PagedListAdapter<Movie.Datum,MovieAdapter.MovieAdpteHolder> {
 
     private OnItemClickListener onItemClickListener;
-    ArrayList<Movie.Datum> data = new ArrayList<>();
+    //ArrayList<Movie.Datum> data = new ArrayList<>();
 
     public MovieAdapter(Context context) {
+
+        super(Movie.CALLBACK);
         this.context = context;
     }
 
@@ -37,20 +40,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdpteHo
 
     @Override
     public void onBindViewHolder(@NonNull MovieAdpteHolder holder, int position) {
-        Movie.Datum datum=data.get(position);
-       // holder.itemMovieBinding.mShimmerViewContainer.startShimmerAnimation();
-      //  holder.itemMovieBinding.txtRate.setText(datum.getImdbRating());
-       // holder.itemMovieBinding.txtTitle.setText(datum.getTitle());
-       // datum.setPoster(datum.getPoster());
-       // Picasso.with(context).load(datum.getPoster()).into(holder.itemMovieBinding.imageView);
+      //  Movie.Datum datum=data.get(position);
+        Movie.Datum datum=getItem(position);
 
         holder.itemMovieBinding.setDatum(datum);
     }
 
-    @Override
-    public int getItemCount() {
-        return data.size();
-    }
+//    @Override
+//    public int getItemCount() {
+//        return data.size();
+//    }
 
     public class MovieAdpteHolder extends RecyclerView.ViewHolder {
         ItemMovieBinding itemMovieBinding;
@@ -64,7 +63,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdpteHo
                     int clickPosition = getAdapterPosition();
                     if (onItemClickListener != null && clickPosition != RecyclerView.NO_POSITION)
                     {
-                        onItemClickListener.onItemClick(data.get(clickPosition));
+                        onItemClickListener.onItemClick(getItem(clickPosition));
 
 
                     }
@@ -75,10 +74,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdpteHo
     }
 
 
-    public void setData(ArrayList<Movie.Datum> data) {
-        this.data = data;
-
-    }
+//    public void setData(ArrayList<Movie.Datum> data) {
+//        this.data = data;
+//
+//    }
 
     public interface OnItemClickListener {
         void onItemClick(Movie.Datum post);
