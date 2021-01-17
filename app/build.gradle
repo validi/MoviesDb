@@ -61,4 +61,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version1"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version1"
 
+
+    def paging_version = "3.0.0-alpha12"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
+
+
 }
