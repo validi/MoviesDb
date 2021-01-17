@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     int page = 2;
     Movie movies = new Movie();
-    ArrayList<Movie.Datum> data = new ArrayList<>();
+   // ArrayList<Movie.Datum> data = new ArrayList<>();
+    PagedList<Movie.Datum> data ;
     RecyclerView recyclerView;
     MovieAdapter movieAdapter;
     MainActivityViewModel mainActivityViewModel;
@@ -57,15 +59,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void getListMovies() {
 
-        mainActivityViewModel.getListMovie(page).observe(this, new Observer<List<Movie.Datum>>() {
+//        mainActivityViewModel.getListMovie(page).observe(this, new Observer<List<Movie.Datum>>() {
+//            @Override
+//            public void onChanged(List<Movie.Datum> data1) {
+//              data = (ArrayList<Movie.Datum>)data1;
+//                showInRecycler();
+//                binding.swiperefresh.setRefreshing(false);
+//            }
+//        });
+
+        mainActivityViewModel.getPagedListLiveData().observe(this, new Observer<PagedList<Movie.Datum>>() {
             @Override
-            public void onChanged(List<Movie.Datum> data1) {
-              data = (ArrayList<Movie.Datum>)data1;
+            public void onChanged(PagedList<Movie.Datum> data1) {
+                data=data1;
                 showInRecycler();
-                binding.swiperefresh.setRefreshing(false);
             }
         });
-
 
     }
 
@@ -82,7 +91,8 @@ public class MainActivity extends AppCompatActivity {
         movieAdapter=new MovieAdapter(getApplicationContext());
 
         recyclerView.setAdapter(movieAdapter);
-        movieAdapter.setData(data);
+       // movieAdapter.setData(data);
+        movieAdapter.submitList(data);
         movieAdapter.setOnItemClickListener(new MovieAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Movie.Datum post) {
